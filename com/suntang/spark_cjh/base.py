@@ -119,7 +119,6 @@ if __name__ == '__main__':
 
     # # pgsql update
     # t_data = df.to_dict(orient="records")
-    # query = create_batch_update_sql("analysis_etl_gd_ele_fence", "atest", t_data)
     # with PGSQLOpr("192.168.1.99", 6543, "postgres", "postgres", "postgres") as opr:
     #     opr.update_cursor()
     #     opr.cursor.execute(query)

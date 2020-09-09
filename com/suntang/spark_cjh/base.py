@@ -90,9 +90,11 @@ if __name__ == '__main__':
 
     # df = spark.range(10).toPandas()
 
-    a = [[1, 'ww', 333, 4], [2, 'ww', 333, 3], [3, 'ww', 556, 4], [4, 'ww', 556, 5], [5, 'ww', 556, 4], [6, 'ww', 333, 6], [7, 'ww', 333, 7]]
-    dfa = spark.createDataFrame(a, ["id", "name", "age", "count"]).sort("count")
     # df = dfa.toPandas()
+
+    # 44120224419405
+    df = spark.read.parquet('hdfs://192.168.7.150:8020/data_sync_test/gd_ele_fence/202009020800')
+    df[df["netbar_wacode"] == 44120224419405].show()
 
     # # df写入
     # engine = create_engine(
@@ -129,7 +131,5 @@ if __name__ == '__main__':
     # df = df.select("id")
     # df = df.withColumn("update_time", functions.lit(1))
     # df.write.jdbc(url="jdbc:postgresql://192.168.1.99:6543/postgres", table="analysis_etl_gd_ele_fence.atest2", properties={'user': 'postgres', 'password': 'postgres'})
-    # spark.stop()
-
-    df = spark.range(10)
+    spark.stop()
     # df.write.jdbc(url="jdbc:postgresql://192.168.1.99:6543/postgres", table="analysis_etl_gd_ele_fence.atest3", properties={'user': 'postgres', 'password': 'postgres'}, mode="append")

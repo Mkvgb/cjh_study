@@ -132,8 +132,6 @@ class UpdateTimeEleFence(object):
         df_pla_sub = df_pla_new.select("netbar_wacode").subtract(df_pla_old.select("netbar_wacode"))
         df_pla_sub = df_pla_sub.join(df_pla_new, ["netbar_wacode"], "left")
         df_pla_sub = df_pla_sub.withColumn("update_time", df_pla_sub.update_time.astype("long"))
-        df_pla_sub.show()
-        df_pla_sub.printSchema()
 
         # df_pla_old有的才更新
         # df_pla_new[id, update_time]
@@ -147,26 +145,6 @@ class UpdateTimeEleFence(object):
         # 去除掉没有更新的场所，即update_time为空
         df_pla_new = df_pla_new[df_pla_new["update_time"] > 0]
         df_pla_new.show()
-
-        # data_list = df_pla_new.toJSON().collect()
-        # print(data_list)
-        # producer = Producer('policeTracePythonProducer')
-        # producer.set_namesrv_addr('192.168.9.214:9876')
-        # producer.start()
-        # while data_list:
-        #     msg_body = copy.deepcopy(MSG_TEMPLATE)
-        #     msg_body['param']['conn']['table'] = "gd_place"
-        #     msg = Message("SparkPlan")
-        #     msg.set_tags(str(uuid.uuid1()))
-        #     if len(data_list) >= 100:
-        #         send_data_list = data_list[:100]
-        #         data_list = data_list[100:]
-        #     else:
-        #         send_data_list, data_list = data_list, None
-        #     msg_body['data'] = f"[{','.join(send_data_list)}]"
-        #     msg.set_body(json.dumps(msg_body))
-        #     producer.send_sync(msg)
-        # # producer.shutdown()
 
     def update_time_dev(self, df_ef, df_dev_old):
         """设备表updatetime更新，具体输出dataframe格式为[id, updatetime]"""
@@ -189,8 +167,6 @@ class UpdateTimeEleFence(object):
         _df_ef_dev_true = _df_ef_dev_true.join(_df_dev_new, ["device_mac"], "left")
         _df_ef_dev_true = _df_ef_dev_true.withColumnRenamed("update_time_new", "update_time")
         df_dev_sub = _df_ef_dev_true.withColumn("update_time", _df_ef_dev_true.update_time.astype("long"))
-        df_dev_sub.show()
-        df_dev_sub.printSchema()
 
         df_dev_new = _df_dev_old.join(_df_dev_new, ["device_mac"], "outer")
         func_select_field = udf(lambda x, y: UdfUtils().udf_select_filed(x, y), StringType())

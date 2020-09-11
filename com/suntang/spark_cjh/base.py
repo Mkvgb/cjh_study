@@ -13,9 +13,11 @@ from pyspark.sql.types import *
 from pyspark.sql import *
 from pyspark.sql.functions import udf, split, explode, concat_ws, isnan, isnull
 from pyspark.sql import functions
+from pyspark.sql.window import Window
 from io import StringIO
 from sqlalchemy import create_engine
 import psycopg2
+
 
 
 class PGSQLOpr(object):
@@ -88,13 +90,16 @@ if __name__ == '__main__':
     spark = SparkSession.builder.config(conf=conf).getOrCreate()
     # CjhTest(spark).cjhtest()
 
-    # df = spark.range(10).toPandas()
 
+
+    # df = spark.range(10000)
+    # df = df.withColumnRenamed("id", "field")
+    # df = df.withColumn("id", functions.monotonically_increasing_id())
+    # df.show(10000)
     # df = dfa.toPandas()
+    # spark.read.parquet('hdfs://192.168.7.150:8020/data_sync_test/gd_ele_fence/202009110800').show()
 
     # 44120224419405
-    df = spark.read.parquet('hdfs://192.168.7.150:8020/data_sync_test/gd_ele_fence/202009020800')
-    df[df["netbar_wacode"] == 44120224419405].show()
 
     # # df写入
     # engine = create_engine(

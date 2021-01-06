@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="root@192.168.7.152:22 password">
     <serverData>
-      <paths name="9.201">
+      <paths name="cjh_study_20201203_7.152">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -12,7 +12,7 @@
       <paths name="root@192.168.7.152:22 password">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/test/cjh/pycharm_code/cjh_study" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/test/cjh/pycharm_code/cjh_study_20201203/com/suntang/sms_cjh/stsms_20201203" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

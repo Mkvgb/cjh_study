@@ -1,0 +1,188 @@
+server:
+  port: 8080
+  servlet:
+    application-display-name: 公安大数据实战平台
+    context-path: /police
+
+nacos:
+  config:
+    auto-refresh: true
+    bootstrap:
+      enable: true
+      log-enable: true
+    data-id: application-dev.yml
+    group: dev
+    password: suntang@123
+    remote-first: true
+    server-addr: 192.168.1.99:8848
+    type: yaml
+    username: nacos
+    namespace: dev
+
+encrypt:
+  body:
+    open: true
+    des-key: 12345678
+    public-key: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKYaY3Y8JBIiyp5FvXsuptq68EdBkTttfvLteS
+      lBX49LO0o7WZYmQW5pTlA2LIHPDfDj7F5w/xpnAGOHDSFiqtD7Wc+eI8NG6rwqicV+F8PVHivegx
+      +mTM3ZVU7p1kQ5qG+g+YMmBEAqAOguHhXxHKuqJJO+Kek7NFZ5+OPN0AQQIDAQAB"
+    rsa-private-key: "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIphpjdjwkEiLKnkW9ey6m2rrwR0
+      GRO21+8u15KUFfj0s7SjtZliZBbmlOUDYsgc8N8OPsXnD/GmcAY4cNIWKq0PtZz54jw0bqvCqJxX
+      4Xw9UeK96DH6ZMzdlVTunWRDmob6D5gyYEQCoA6C4eFfEcq6okk74p6Ts0Vnn4483QBBAgMBAAEC
+      gYBrKBSrXa+l+k21vWS1UhGgnUqo2zI0BumNiKtcERo2r16dKgxM21kANsvjz0xmA6suPvyzCSta
+      h/TFjF0pAgtG1UhGKlpRc/jT+vtw3Imog2uqO3ceDcOLLdIZkJzUO+PmRwF1qaSYpoDWtZcbkVJQ
+      kkf1c0ZVmQ1WxVWemPaacQJBAM8TUFH+4xiI/deKlSSW+anevlVD9netwfNan5UxcyAr31G7xhzN
+      IHGEzZsm6O8kGAJPy0OCJkijR2Y/9WPSMWUCQQCrE3gUhxI7s2/iB7emVPES6/aVnvk6MsCslwjk
+      QfPt7N2mCeA+VR2621WdkB4APs2WtV/akLh2JbWar9wBqLOtAkA8YAE3Jv3HlYmNYpaBiJNad9s+
+      uQYPdtXpwi5tLXHHm4MNLZZhp10iO/pGll2r+/YUFnfJQxUucIzMvzEo3YwRAkBITq5OXtjCCxGb
+      A5AH6ZcLXFiY3NySUKlHSX8kmwuy4I6+gyYYsnkiZVpGgodrqx/SN08QXmLY7Q9ZFkNzIA7xAkEA
+      tZOLYGn3mIpVKwPdlThm4W6JlcyTY44P6yo1DJ5pY+8YbSAhGiCAqdhLJIL+w53wahbBwOW9XT5D
+      0BJjY7sP6w=="
+    show-log: true
+    timestamp-check: true
+
+logging:
+  level:
+    com:
+      suntang:
+        mapper: debug
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: AUTO
+  mapper-locations: classpath*:/mybatis/mapper/*.xml
+  type-aliases-package: com.suntang.entity;com.suntang.*.entity
+  type-enums-package: com.suntang.enums
+
+pagehelper:
+  helperDialect: postgresql
+  params: count=countSql
+  reasonable: true
+  supportMethodsArguments: true
+
+socketio:
+  allowCustomRequests: true
+  bossCount: 1
+  host: localhost
+  maxFramePayloadLength: 1048576
+  maxHttpContentLength: 1048576
+  pingInterval: 5000
+  pingTimeout: 60000
+  port: 8888
+  upgradeTimeout: 10000
+  workCount: 100
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    druid:
+      filters: stat,config
+      initial-size: 10
+      max-active: 20
+      min-idle: 5
+      query-timeout: 10000
+      remove-abandoned-timeout: 1800
+      transaction-query-timeout: 10000
+    password: postgres
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:postgresql://192.168.1.99:5435/police_analysis_db?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: postgres
+  rabbitmq:
+    host: 192.168.1.99
+    password: admin
+    port: 5672
+    username: admin
+  redis:
+    database: 1
+    host: 192.168.1.99
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    password: suntang@police
+    port: 6379
+    timeout: 10000
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+swagger:
+  enable: true
+map:
+# 地图中心坐标
+  center:
+    latitude: 23.079508
+    longitude: 112.476393
+  line:
+    online: false
+  offline:
+    url: 192.168.1.99:8060
+  # 前端页面的搜索城市
+  search-city: 肇庆
+  # 地图缩放级别
+  zoom: 13
+  zooms: '[11, 20]'
+
+imageUpload:
+  prefix-url: http://192.168.1.99
+  root-dir: /opt/filecenter/image
+  car-dir: /opt/filecenter/image/car
+  person-dir: /opt/filecenter/image/person
+
+PEER_TIME: 1800000
+
+FILE_CENTER_DIR: /opt/filecenter
+wifi_url: http://192.168.7.152:22221/ap_search
+case_url: http://192.168.7.152:22221/track_in_time_sync
+fence_url: http://192.168.7.152:22221/ele_search
+message_url: http://192.168.7.152:22221/sms_send
+is_pg_url: http://192.168.7.152:22221/track_sync
+audit_url: http://192.168.7.152:22221/http_search
+real_time_url: http://192.168.7.152:22221/realtime_data
+device_real_time_url: http://192.168.7.152:22221/device_realtime_data
+
+
+queue:
+  search: dev_search_queue
+  track: dev_track_queue
+  sms: dev_scheduler_queue
+exchange:
+  direct: dev_direct_exchange
+router:
+  personTrack: dev_track_router
+  search: dev_search_router
+  warnSms: dev_scheduler_router
+
+mode: 'Master'
+project: 'weihai'
+
+cdh:
+  hosts:
+    -   '192.168.7.150:9870'
+    -   '192.168.7.151:9870'
+    -   '192.168.7.152:9870'
+  host: '192.168.7.150:9870'
+  hdfs_user_name: 'hdfs'
+  # ['/' + 'weihai' + '/src/']
+  hdfs_root_dir: '/src/'
+
+file_sync:
+  ftp_root_dir: '/var/suntang/data/szgd/'
+  api_place:  http://192.168.1.99:8080/police/oauth/place/batch/putOrPost
+  api_device: http://192.168.1.99:8080/police/oauth/device/batch/putOrPost
+  local_tmp_dir: '/var/suntang/data/temp/'
+
+ssh_server:
+  ssh_ip_file_server: '192.168.7.152'
+  ssh_port_file_server: 22
+  ssh_username_file_server: 'root'
+  ssh_password_file_Server: 'suntang@518'
